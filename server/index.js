@@ -8,7 +8,7 @@ const app = express()
 app.use(cors(
     {
         origin:["https://car-rental-crud-project-frontend.vercel.app"],
-        methods:['POST', 'GET'],
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true
     }
 ))
