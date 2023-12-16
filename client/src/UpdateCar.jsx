@@ -13,7 +13,7 @@ function UpdateCar() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get('http://localhost:3001/getCar/'+id)
+        axios.get('https://car-rental-crud-project-api.vercel.app/getCar/'+id)
             .then(result => {
                 {console.log(result)
                     setOwner(result.data.owner)
@@ -28,7 +28,7 @@ function UpdateCar() {
 
     const Update = (e) => {
         e.preventDefault();
-        axios.put("http://localhost:3001/updateCar/"+id,{owner, model, seats, available})
+        axios.put("https://car-rental-crud-project-api.vercel.app/updateCar/"+id,{owner, model, seats, available})
         .then(result =>{ 
             console.log(result)
             navigate('/')

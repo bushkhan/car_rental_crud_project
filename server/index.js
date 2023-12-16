@@ -5,11 +5,17 @@ const UserModel = require('./models/Cars.js')
 const CarModel = require("./models/Cars.js")
 
 const app = express()
-app.use(cors())
+app.use(cors(
+    {
+        origin:["https://car-rental-crud-project-api.vercel.app/"],
+        methods:['POST', 'GET'],
+        credentials: true
+    }
+))
 app.use(express.json())
 
-
-mongoose.connect("mongodb://127.0.0.1:27017/crud")
+ 
+mongoose.connect("mongodb+srv://Bushra:Bushra123@cluster0.47apsm5.mongodb.net/crud?retryWrites=true&w=majority")
 
 app.post('/createCar', (req, res) => {
     UserModel.create(req.body)
