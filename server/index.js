@@ -7,7 +7,7 @@ const CarModel = require("./models/Cars.js")
 const app = express()
 app.use(cors(
     {
-        origin:["https://car-rental-crud-project-frontend.vercel.app/"],
+        origin:["https://car-rental-crud-project-frontend.vercel.app"],
         methods:['POST', 'GET'],
         credentials: true
     }
