@@ -14,8 +14,8 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Cars/>}></Route>
-          <Route path='/register' element={<Signup/>}></Route>
+          <Route path='/home' element={<Cars/>}></Route>
+          <Route path='/' element={<Signup/>}></Route>
           <Route path='/login' element={<SignIn/>}></Route>
           <Route path='/create' element={<CreateCar/>}></Route>
           <Route path='/update/:id' element={<UpdateCar/>}></Route>

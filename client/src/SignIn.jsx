@@ -20,7 +20,7 @@ function SignIn() {
                 console.log(result)
                 if (result.data == "Success") {
                     setLoginStatus('success');
-                    navigate("/");
+                    navigate("/home");
 
                 } else {
                     setLoginStatus('failure');
