@@ -10,7 +10,9 @@ app.use(cors(
     {
         origin:["https://car-rental-crud-project-frontend.vercel.app"],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        credentials: true
+        credentials: true,
+        exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
     }
 ))
 app.use(express.json())
@@ -29,7 +31,10 @@ db.once('open',()=>{
 
 app.post('/createCar', (req, res) => {
     UserModel.create(req.body)
-        .then(cars => res.json(cars))
+        .then(cars => {
+            console.log(DB_USERNAME);
+            res.json(cars)
+        })
         .catch(err => res.json(err))
 })
 
