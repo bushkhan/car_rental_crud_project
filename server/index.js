@@ -3,6 +3,11 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const CarModel = require("./models/Cars.js")
 const UserModel = require("./models/Users.js")
+const { DBURL, APP_PORT } = require('./config/index.js')
+
+
+console.log(DBURL);
+console.log(APP_PORT);
 
 const app = express()
 app.use(cors(
@@ -16,7 +21,7 @@ app.use(cors(
 app.use(express.json())
 
  
-mongoose.connect("mongodb+srv://Bushra:Bushra123@cluster0.47apsm5.mongodb.net/crud?retryWrites=true&w=majority")
+mongoose.connect(DBURL)
 
 app.post('/createCar', (req, res) => {
     CarModel.create(req.body)
@@ -80,7 +85,7 @@ app.post('/login',(req, res)=>{
     })
 })
 
-app.listen(3001, () => {
+app.listen(APP_PORT, () => {
     console.log("Server Running...");
 })
 

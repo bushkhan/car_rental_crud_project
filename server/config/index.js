@@ -1,9 +1,7 @@
-import dotenv from 'dotenv';
-
+const dotenv = require('dotenv');
 dotenv.config();
 
-export const {
-
+const {
     APP_PORT,
     DB_USERNAME,
     DB_PASSWORD,
@@ -11,9 +9,22 @@ export const {
     APP_URL,
     DEBUG_MODE,
     JWT_SECRET,
-    REFRESH_SECRET
+    REFRESH_SECRET,
+    DBURL,
+    URL,
+    LOCALURL
+} = process.env;
 
-} = process.env
-
-//getting environment variables here
-//object destructuring
+module.exports = {
+    APP_PORT,
+    DB_USERNAME,
+    DB_PASSWORD,
+    DB_NAME,
+    APP_URL,
+    DEBUG_MODE,
+    JWT_SECRET,
+    REFRESH_SECRET,
+    DBURL,
+    URL,
+    LOCALURL
+};
