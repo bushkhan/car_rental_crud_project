@@ -7,12 +7,12 @@ const UserModel = require("./models/Users.js")
 const app = express()
 app.use(cors(
     {
-        origin:['*'],
-        // origin:["https://car-rental-crud-project-frontend.vercel.app"],
+        origin: 'https://car-rental-crud-project-frontend.vercel.app',
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true
     }
 ))
+
 app.use(express.json())
 
  
@@ -55,6 +55,8 @@ app.delete('/deleteCar/:id', (req, res) => {
         .then(result => res.json(result))
         .catch(err => res.json(err));
 });
+
+app.options('/register', cors()); // Respond to preflight requests
 
 app.post('/register',(req, res)=>{
     UserModel.create(req.body)
