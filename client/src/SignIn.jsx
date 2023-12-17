@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Alert } from 'bootstrap';
 function SignIn() {
 
     const [email, setEmail] = useState()
@@ -18,7 +17,7 @@ function SignIn() {
         axios.post('https://car-rental-crud-project-frontend.vercel.app/login', { email, password })
             .then(result => {
                 console.log(result)
-                if (result.data == "Success") {
+                if (result.data === "Success") {
                     setLoginStatus('success');
                     navigate("/home");
 
