@@ -1,8 +1,8 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-const UserModel = require('./models/Cars.js')
 const CarModel = require("./models/Cars.js")
+const UserModel = require("./models/Users.js")
 
 const app = express()
 app.use(cors(
@@ -18,7 +18,7 @@ app.use(express.json())
 mongoose.connect("mongodb+srv://Bushra:Bushra123@cluster0.47apsm5.mongodb.net/crud?retryWrites=true&w=majority")
 
 app.post('/createCar', (req, res) => {
-    UserModel.create(req.body)
+    CarModel.create(req.body)
         .then(cars => res.json(cars))
         .catch(err => res.json(err))
 })
@@ -55,6 +55,27 @@ app.delete('/deleteCar/:id', (req, res) => {
         .catch(err => res.json(err));
 });
 
+app.post('/register',(req, res)=>{
+    UserModel.create(req.body)
+    .then(users => res.json(users))
+    .catch(err => res.json(err))
+})
+
+app.post('/login',(req, res)=>{
+    const {email, password} = req.body;
+    UserModel.findOne({email: email})
+    .then(user => {
+        if(user){
+            if(user.password === password){
+                res.json("Success")
+            }else{
+                res.json("Incorrect Passowrd.")
+            }
+        }else{
+            res.json("User does not exist.")
+        }
+    })
+})
 
 app.listen(3001, () => {
     console.log("Server Running...");
