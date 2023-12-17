@@ -1,15 +1,9 @@
-
-
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const UserModel = require('./models/Cars.js')
 const CarModel = require("./models/Cars.js")
-const { APP_PORT, DB_NAME, DB_PASSWORD, DB_USERNAME } = require('./config');
-console.log(`App Port: ${APP_PORT}`);
-console.log(`DB Name: ${DB_NAME}`);
-console.log(`DB Username: ${DB_USERNAME}`);
-console.log(`DB Password: ${DB_PASSWORD}`);
+
 const app = express()
 app.use(cors(
     {
@@ -20,16 +14,7 @@ app.use(cors(
 ))
 app.use(express.json())
 
-// const DB_URL = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.47apsm5.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
-// mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true});
-
-
-// const db = mongoose.connection;
-// db.on('error',console.error.bind(console,'connection error:'));
-// db.once('open',()=>{
-//     console.log('DB connected...');
-// });
-
+ 
 mongoose.connect("mongodb+srv://Bushra:Bushra123@cluster0.47apsm5.mongodb.net/crud?retryWrites=true&w=majority")
 
 app.post('/createCar', (req, res) => {
