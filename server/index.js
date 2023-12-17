@@ -1,18 +1,21 @@
+
+
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const UserModel = require('./models/Cars.js')
 const CarModel = require("./models/Cars.js")
-import { APP_PORT, DB_NAME, DB_PASSWORD,DB_USERNAME } from './config';
-
+const { APP_PORT, DB_NAME, DB_PASSWORD, DB_USERNAME } = require('./config');
+console.log(`App Port: ${APP_PORT}`);
+console.log(`DB Name: ${DB_NAME}`);
+console.log(`DB Username: ${DB_USERNAME}`);
+console.log(`DB Password: ${DB_PASSWORD}`);
 const app = express()
 app.use(cors(
     {
         origin:["https://car-rental-crud-project-frontend.vercel.app"],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        credentials: true,
-        exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true
     }
 ))
 app.use(express.json())
@@ -31,10 +34,7 @@ db.once('open',()=>{
 
 app.post('/createCar', (req, res) => {
     UserModel.create(req.body)
-        .then(cars => {
-            console.log(DB_USERNAME);
-            res.json(cars)
-        })
+        .then(cars => res.json(cars))
         .catch(err => res.json(err))
 })
 
@@ -71,7 +71,7 @@ app.delete('/deleteCar/:id', (req, res) => {
 });
 
 
-app.listen(APP_PORT, () => {
+app.listen(3001, () => {
     console.log("Server Running...");
 })
 
