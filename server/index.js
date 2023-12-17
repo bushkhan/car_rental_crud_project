@@ -20,17 +20,17 @@ app.use(cors(
 ))
 app.use(express.json())
 
-const DB_URL = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.47apsm5.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
-mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true});
+// const DB_URL = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.47apsm5.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
+// mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true});
 
 
-const db = mongoose.connection;
-db.on('error',console.error.bind(console,'connection error:'));
-db.once('open',()=>{
-    console.log('DB connected...');
-});
+// const db = mongoose.connection;
+// db.on('error',console.error.bind(console,'connection error:'));
+// db.once('open',()=>{
+//     console.log('DB connected...');
+// });
 
-// mongoose.connect("mongodb+srv://Bushra:Bushra123@cluster0.47apsm5.mongodb.net/crud?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://Bushra:Bushra123@cluster0.47apsm5.mongodb.net/crud?retryWrites=true&w=majority")
 
 app.post('/createCar', (req, res) => {
     UserModel.create(req.body)
