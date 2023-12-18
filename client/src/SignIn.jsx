@@ -16,12 +16,22 @@ function SignIn() {
         e.preventDefault()
         axios.post('https://car-rental-crud-project-api.vercel.app/login', { email, password })
             .then(result => {
-                console.log(result)
-                if (result.data === "Success") {
+                console.log(result.data)
+                const { status, user } = result.data;
+                if (status === "Success" && user.role === "Admin") {
                     setLoginStatus('success');
                     navigate("/home");
 
-                } else {
+                } else if(status === "Success" && user.role === "User"){
+                    setLoginStatus('success');
+                    navigate("/userHome");
+                }
+                else if(status === "Success" && user.role === "Vendor"){
+                    setLoginStatus('success');
+                    navigate("/vendorHome");
+                }
+                
+                else {
                     setLoginStatus('failure');
                 }
 

@@ -12,7 +12,6 @@ const {
     REFRESH_SECRET,
     DBURL,
     URL,
-    LOCALURL
 } = process.env;
 
 module.exports = {
@@ -26,5 +25,4 @@ module.exports = {
     REFRESH_SECRET,
     DBURL,
     URL,
-    LOCALURL
 };

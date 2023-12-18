@@ -3,19 +3,23 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const CarModel = require("./models/Cars.js")
 const UserModel = require("./models/Users.js")
+const CarDataModel = require("./models/Cardata.js")
+const path = require('path');
+
+const multer = require('multer');
+
 const { DBURL, APP_PORT } = require('./config/index.js')
 
 
-console.log(DBURL);
-console.log(APP_PORT);
+
 
 const app = express()
 app.use(cors(
-    {
-        origin: 'https://car-rental-crud-project-frontend.vercel.app',
-        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        credentials: true
-    }
+    // {
+    //     origin: 'https://car-rental-crud-project-frontend.vercel.app',
+    //     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    //     credentials: true
+    // }
 ))
 
 app.use(express.json())
@@ -75,7 +79,16 @@ app.post('/login',(req, res)=>{
     .then(user => {
         if(user){
             if(user.password === password){
-                res.json("Success")
+                res.json({
+                    status: "Success",
+                    user: {
+                        id: user._id,
+                        name: user.name,
+                        email: user.email,
+                        role: user.role,
+                        // Add other user details you want to include
+                    }
+                })
             }else{
                 res.json("Incorrect Passowrd.")
             }
@@ -83,6 +96,70 @@ app.post('/login',(req, res)=>{
             res.json("User does not exist.")
         }
     })
+})
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/'); 
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname)); 
+    },
+  });
+  
+  const upload = multer({ storage: storage });
+  
+  app.post('/addCar', upload.array('carImages', 5), async (req, res) => {
+    try {
+      const { carName, carModel, carLocation } = req.body;
+  
+      const carImages = req.files.map((file) => file.path);
+  
+      const newCar = new CarDataModel({
+        carName,
+        carModel,
+        carLocation,
+        carImages,
+      });
+  
+      const savedCar = await newCar.save();
+  
+      res.json(savedCar);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  module.exports = app;
+
+
+
+
+const carImagesDirectory = path.join(__dirname, 'carImages');
+
+app.get('/carImages/:location/:car', (req, res) => {
+  const { location, car } = req.params;
+
+  const imagesPath = path.join(carImagesDirectory, location, car);
+
+  fs.readdir(imagesPath, (err, files) => {
+    if (err) {
+      console.error('Error reading directory:', err);
+      // Handle the error and send a meaningful response
+      res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      res.json(files);
+    }
+  });
+});
+
+
+app.get('/caraData', (req, res) => {
+    CarDataModel.find({})
+        .then(results => res.json(results))
+        .catch(err => res.json(err))
 })
 
 app.listen(APP_PORT, () => {

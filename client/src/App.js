@@ -7,6 +7,8 @@ import CreateCar from './CreateCar';
 import UpdateCar from './UpdateCar';
 import Signup from './Signup';
 import SignIn from './SignIn';
+import UserHome from './UserHome';
+import VendorHome from './VendorHome';
 
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/home' element={<Cars/>}></Route>
+          <Route path='/userHome' element={<UserHome/>}></Route>
+          <Route path='/vendorHome' element={<VendorHome/>}></Route>
           <Route path='/' element={<Signup/>}></Route>
           <Route path='/login' element={<SignIn/>}></Route>
           <Route path='/create' element={<CreateCar/>}></Route>
