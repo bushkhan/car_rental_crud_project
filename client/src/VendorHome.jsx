@@ -26,7 +26,7 @@ function VendorHome() {
     }
   
     try {
-      const result = await axios.post('https://car-rental-crud-project-api.vercel.app/addCar', formData);
+      const result = await axios.post('http://localhost:3001/addCar', formData);
       console.log(result.data);
       // Handle success
   

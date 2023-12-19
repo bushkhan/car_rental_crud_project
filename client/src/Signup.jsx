@@ -21,7 +21,7 @@ function Signup() {
 
 
         e.preventDefault()
-        axios.post('https://car-rental-crud-project-api.vercel.app/register', {name, email, password, role})
+        axios.post('http://localhost:3001/register', {name, email, password, role})
         .then(result =>{
             console.log(result)
             navigate("/login")

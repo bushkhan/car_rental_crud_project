@@ -11,10 +11,10 @@ function CreateCar() {
 
     const Submit = (e) => {
         e.preventDefault();
-        axios.post("https://car-rental-crud-project-api.vercel.app/createCar",{owner, model, seats, available})
+        axios.post("http://localhost:3001/createCar",{owner, model, seats, available})
         .then(result =>{ 
             console.log(result)
-            navigate('/')
+            navigate('/home')
         })
         .catch(err => console.log(err))
     }

@@ -6,7 +6,7 @@ function Cars() {
     const [cars, setCars] = useState([]);
 
     useEffect(() => {
-        axios.get('https://car-rental-crud-project-api.vercel.app/')
+        axios.get('http://localhost:3001/')
             .then(result => {
                 console.log(result.data);
                 setCars(result.data);
@@ -16,7 +16,7 @@ function Cars() {
 
     const handleDelete = (id) => {
         console.log("hello");
-        axios.delete(`https://car-rental-crud-project-api.vercel.app/deleteCar/${id}`)
+        axios.delete(`http://localhost:3001/deleteCar/${id}`)
         .then(res => {
             console.log(res)
             window.location.reload()

@@ -14,7 +14,7 @@ function SignIn() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('https://car-rental-crud-project-api.vercel.app/login', { email, password })
+        axios.post('http://localhost:3001/login', { email, password })
             .then(result => {
                 console.log(result.data)
                 const { status, user } = result.data;
